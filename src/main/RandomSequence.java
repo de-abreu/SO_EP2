@@ -1,3 +1,5 @@
+package main;
+
 public class RandomSequence {
 
     // Generate a randomly sorted sequence of n numbers from 1 to n
