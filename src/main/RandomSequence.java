@@ -2,12 +2,12 @@ package main;
 
 public class RandomSequence {
 
-    // Generate a randomly sorted sequence of n numbers from 1 to n
+    // Generate a randomly sorted sequence of n numbers from 0 to n - 1
     public static int[] randomSequence(int n) {
         int[] array = new int[n];
 
         for (int i = 0; i < n; i++)
-            array[i] = i + 1;
+            array[i] = i;
         shuffle(array, n);
 
         return array;
