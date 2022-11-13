@@ -9,7 +9,7 @@ public class RWtest {
     private static Database db;
     private static int variety = 100, repeat = 50;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         lock = new Lock();
         controller = new AccessControl();
 
@@ -27,16 +27,17 @@ public class RWtest {
         }
     }
 
-    private static long totalTime(boolean concurrency) {
+    private static long totalTime(boolean concurrency) throws FileNotFoundException, InterruptedException {
         long start = System.currentTimeMillis();
         for (int i = 0; i <= variety; i++)
-            System.out.println("Average running time for " + i + " writers and" + (100 - i) + "readers: "
-                    + averageTime(i, concurrency) + "minutes");
+            System.out.println("Average running time for " + i + " writers and " + (100 - i) + " readers: "
+                    + averageTime(i, concurrency) + " milliseconds");
         long end = System.currentTimeMillis();
         return (end - start) / 60000;
     }
 
-    private static int averageTime(int proportion, boolean concurrency) {
+    private static int averageTime(int proportion, boolean concurrency)
+            throws FileNotFoundException, InterruptedException {
         int average = 0;
         for (int i = 0; i < repeat; i++) {
             db.setup();
@@ -50,14 +51,14 @@ public class RWtest {
         return average / repeat;
     }
 
-    private static Thread[] generateThreads(int proportion, boolean concurrency) {
+    private static Thread[] generateThreads(int proportion, boolean concurrency) throws FileNotFoundException {
         Thread[] threads = new Thread[100];
-        int[] sequence = randomSequence(variety);
+        int[] sequence = RandomSequence.generate(variety);
         int i = 0;
         while (i < proportion)
-            threads[sequence[i++]] = new Writer(db, controller, lock, concurrency);
+            threads[sequence[i++]] = new Thread(new Writer(db, controller, lock, concurrency));
         while (i < variety)
-            threads[sequence[i++]] = new Reader(db, controller, lock, concurrency);
+            threads[sequence[i++]] = new Thread(new Reader(db, controller, lock, concurrency));
         return threads;
     }
 
@@ -66,7 +67,7 @@ public class RWtest {
             thread.start();
     }
 
-    private static void joinThreads(Thread[] threads) {
+    private static void joinThreads(Thread[] threads) throws InterruptedException {
         for (Thread thread : threads)
             thread.join();
     }
