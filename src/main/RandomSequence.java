@@ -2,7 +2,7 @@ package main;
 
 public class RandomSequence {
 
-    // Generate a randomly sorted sequence of n numbers from 0 to n - 1
+    // Generate a randomly sorted sequence of n integers from 0 up to n - 1, n > 0
     public static int[] randomSequence(int n) {
         int[] array = new int[n];
 
