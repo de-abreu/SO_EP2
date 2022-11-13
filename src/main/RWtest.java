@@ -23,7 +23,7 @@ public class RWtest {
         boolean[] types = { true, false };
         for (boolean concurrency : types) {
             System.out.println("Concurrency: " + concurrency);
-            System.out.println("Total running time:" + totalTime(concurrency) + "min");
+            System.out.println("Total running time: " + totalTime(concurrency) + " min");
         }
     }
 
