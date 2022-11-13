@@ -5,5 +5,9 @@ public class RWtest {
 
     public static void main(String[] args) {
 
+    for (boolean concurrency : {true, false}) {
+
+        }
+
     }
 }
