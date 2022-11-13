@@ -9,7 +9,6 @@ public class RandomSequence {
         for (int i = 0; i < n; i++)
             array[i] = i;
         shuffle(array, n);
-
         return array;
     }
 

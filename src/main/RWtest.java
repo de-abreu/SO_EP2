@@ -16,7 +16,7 @@ public class RWtest {
         try {
             db = new Database(new File(args[0]));
         } catch (FileNotFoundException e) {
-            System.out.println("File " + args[0] + "not found");
+            System.out.println("File " + args[0] + " not found");
             return;
         }
 
@@ -32,8 +32,7 @@ public class RWtest {
         for (int i = 0; i <= variety; i++)
             System.out.println("Average running time for " + i + " writers and " + (100 - i) + " readers: "
                     + averageTime(i, concurrency) + " milliseconds");
-        long end = System.currentTimeMillis();
-        return (end - start) / 60000;
+        return (System.currentTimeMillis() - start) / 60000;
     }
 
     private static int averageTime(int proportion, boolean concurrency)
@@ -45,8 +44,7 @@ public class RWtest {
             long start = System.currentTimeMillis();
             startThreads(threads);
             joinThreads(threads);
-            long end = System.currentTimeMillis();
-            average += end - start;
+            average += System.currentTimeMillis() - start;
         }
         return average / repeat;
     }
