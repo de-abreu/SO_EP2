@@ -1,9 +1,9 @@
 package main;
 
 public class Lock {
-    private boolean isLocked;
-    private Thread hasLocked;
-    private int countBlocked;
+    private boolean isLocked = false;
+    private Thread hasLocked = null;
+    private int countBlocked = 0;
 
     public syncronized void Activate() {
         Thread current = Thread.currentThread();
