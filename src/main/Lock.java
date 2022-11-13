@@ -5,7 +5,7 @@ public class Lock {
     private Thread hasLocked = null;
     private int countBlocked = 0;
 
-    public syncronized void Activate() {
+    public synchronized void Activate() throws InterruptedException {
         Thread current = Thread.currentThread();
         while (isLocked && hasLocked != current)
             wait();
@@ -14,8 +14,8 @@ public class Lock {
         countBlocked++;
     }
 
-    public syncronized void Deactivate() {
-        if(Thread.currentThread() != hasLocked)
+    public synchronized void Deactivate() {
+        if (Thread.currentThread() != hasLocked)
             return;
         countBlocked--;
         if (countBlocked > 0)

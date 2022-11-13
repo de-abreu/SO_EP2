@@ -26,7 +26,7 @@ public class AccessControl {
         readers++;
     }
 
-    synchronized void stopReading() {
+    public synchronized void stopReading() {
         readers--;
         notifyAll();
     }

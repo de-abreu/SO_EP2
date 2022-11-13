@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import main.RandomSequence;
@@ -14,8 +15,11 @@ public class Database {
         backup = new ArrayList<>();
         scan = new Scanner(file);
         while (scan.hasNext()) {
-            backup.add(sc.nextLine());
+            backup.add(scan.nextLine());
         }
+    }
+
+    public void setup() {
         data = backup;
     }
 }
